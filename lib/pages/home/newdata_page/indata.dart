@@ -11,21 +11,41 @@ class homescan extends StatefulWidget {
 }
 
 class _homescanState extends State<homescan> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String x = '';
+
+  String? selectedGender;
+  String? selectmajore;
+  List<String> genders = ['ชาย', 'หญิง'];
+  List<String> majore = [' คณิตศาสตร์','ชีววิทยา','เคมี','ฟิสิกส์','สถิติ','วิทยาศาสตร์สิ่งแวดล้อม','วิทยาการคอมพิวเตอร์','จุลชีววิทยา','คณิตศาสตร์ประยุกต์','เทคโนโลยีสารสนเทศ','วิทยาการข้อมูล','เคมีประยุกต์และจุลชีววิทยาอุตสาหกรรม','เคมีผลิตภัณฑ์และธุรกิจเครื่องสำอาง'];
+
+  List<String> status = [
+    'รหัส',
+    'เพศ',
+    'อายุ',
+    'ชั้นปี',
+    'สาขาวิชา',
+    'จำนวนหน่วยกิจในเทอมการศึกษา',
+    'จำนวนชั่วโมงเรียน'
+  ];
+
   final ID = TextEditingController();
-  final sex = TextEditingController();
-  final ofAge = TextEditingController();
-  final year = TextEditingController();
-  final numoflearn = TextEditingController();
-  final learnforweek = TextEditingController();
+  String Sex = '';
+  final Age = TextEditingController();
+  final Year = TextEditingController();
+  String Major = '';
+  final CountOfLearn = TextEditingController();
+  final Hours = TextEditingController();
 
   @override
   void dispose() {
     ID.dispose();
-    sex.dispose();
-    ofAge.dispose();
-    year.dispose();
-    numoflearn.dispose();
-    learnforweek.dispose();
+    //Sex.dispose();
+    Age.dispose();
+    Year.dispose();
+    //Major.dispose();
+    CountOfLearn.dispose();
+    Hours.dispose();
     super.dispose();
   }
 
@@ -33,30 +53,105 @@ class _homescanState extends State<homescan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("INPUT DATA"),
-        backgroundColor: Colors.black,
+        title: Text(
+          "Effect of sleep quality",
+          style: TextStyle(
+            fontFamily: 'Kanit',
+            fontSize: 20, // ขนาดตัวอักษรตามที่ต้องการ
+            color: Colors.black,
+            fontWeight: FontWeight.bold, // สีตัวอักษรตามที่ต้องการ
+            // คุณยังสามารถกำหนดคุณสมบัติอื่นๆ ของ TextStyle ตามต้องการ
+          ),
+        ),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home), // ไอคอนของปุ่ม
+            onPressed: () {
+              _handHome();
+            },
+          ),
+        ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(30),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 0, 0, 0),
-              Color.fromARGB(255, 26, 161, 210)
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            // กำหนดให้ Column จัดวางตามด้านบน
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // จัดวาง children ใน Column ไปทางด้านซ้าย
+            children: [
+              Text(
+                "A smartphone addiction assessment system on the effect of sleep quality",
+                style: TextStyle(
+                    fontSize: 30, color: Colors.black, fontFamily: 'Anton'),
+              ),
+              Text(
+                "ประเมินความเครียด พฤติกรรมการติดโทรศัพท์มือถือสาร์ทโฟน และคุณภาพการนอนหลับ โดยแบบประเมินแบ่งออกเป็น 4 ส่วน",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color.fromARGB(255, 243, 136, 30),
+                  fontFamily: 'Anton',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 20),
+              ...bulidText(),
+              SizedBox(height: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _postData();
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(255, 243, 136, 30)),
+                      // กำหนดสีพื้นหลังเมื่อปุ่มอยู่ในสถานะปกติ
+                      foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                      elevation: MaterialStateProperty.all<double>(
+                          20), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+                    ),
+                    child: Text("บันทึกข้อมูล"),
+                  ),
+                ],
+              ),
+              SizedBox(height: 30),
+              ...showx(),
+              //...authorbuid(),
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.stretch,
+              //   children: [
+              //     ElevatedButton(
+              //       onPressed: () {
+              //         _handHome();
+              //         _showSuccessSnackBar();
+              //       },
+              //       style: ButtonStyle(
+              //         backgroundColor: MaterialStateProperty.all<Color>(
+              //             Color.fromARGB(255, 243, 136, 30)),
+              //         // กำหนดสีพื้นหลังเมื่อปุ่มอยู่ในสถานะปกติ
+              //         foregroundColor:
+              //             MaterialStateProperty.all<Color>(Colors.white),
+              //         elevation: MaterialStateProperty.all<double>(
+              //             20), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+              //       ),
+              //       child: Text("เสร็จสิ้น"),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),
-        child: Column(
-          children: [
-            ...bulidText(),
-            ...authorbuid(),
-          ],
-        ),
       ),
     );
+  }
+  void _handHome() {
+    Navigator.pushNamed(context, AppRoute.Home);
   }
 
   bulidText() {
@@ -66,8 +161,50 @@ class _homescanState extends State<homescan> {
         child: TextField(
           controller: ID,
           decoration: InputDecoration(
-            labelText: "รหัส",
-            labelStyle: TextStyle(color: Colors.white),
+            labelText: status[0],
+            labelStyle: TextStyle(color: Colors.black),
+            border: OutlineInputBorder(),
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: InputDecorator(
+          decoration: InputDecoration(
+            labelText: '',
+            labelStyle: TextStyle(color: Colors.black),
+            border: OutlineInputBorder(),
+            contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              hint: Text('เพศ'),
+              value: selectedGender,
+              onChanged: (newValue) {
+                setState(() {
+                  selectedGender = newValue!;
+                });
+                String AsString = newValue!; // ค่าที่เลือกมาแปลงเป็น String
+                Sex = AsString;
+              },
+              items: genders.map((String gender) {
+                return DropdownMenuItem<String>(
+                  value: gender,
+                  child: Text(gender),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          controller: Age,
+          decoration: InputDecoration(
+            labelText: status[2],
+            labelStyle: TextStyle(color: Colors.black),
             border: OutlineInputBorder(),
           ),
         ),
@@ -75,32 +212,10 @@ class _homescanState extends State<homescan> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextField(
-          controller: sex,
+          controller: Year,
           decoration: InputDecoration(
-            labelText: "เพศ",
-            labelStyle: TextStyle(color: Colors.white),
-            border: OutlineInputBorder(),
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextField(
-          controller: ofAge,
-          decoration: InputDecoration(
-            labelText: "อายุ",
-            labelStyle: TextStyle(color: Colors.white),
-            border: OutlineInputBorder(),
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextField(
-          controller: year,
-          decoration: InputDecoration(
-            labelText: "ชั้นปี",
-            labelStyle: TextStyle(color: Colors.white),
+            labelText: status[3],
+            labelStyle: TextStyle(color: Colors.black),
             //filled: true,
             // กำหนดให้มีการเติมสีพื้นหลัง
             //fillColor: Colors.grey,
@@ -110,11 +225,42 @@ class _homescanState extends State<homescan> {
       ),
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: TextField(
-          controller: numoflearn,
+        child: InputDecorator(
           decoration: InputDecoration(
-            labelText: "จำนวนหน่วยกิจในเทอมการศึกษา",
-            labelStyle: TextStyle(color: Colors.white),
+            labelText: '',
+            labelStyle: TextStyle(color: Colors.black),
+            border: OutlineInputBorder(),
+            contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              hint: Text('สาขาวิชา'),
+              value: selectmajore,
+              onChanged: (newValue) {
+                setState(() {
+                  selectmajore = newValue!;
+                });
+                String sString = newValue!; // ค่าที่เลือกมาแปลงเป็น String
+                Major = sString;
+              },
+              items: majore.map((String majore) {
+                return DropdownMenuItem<String>(
+                  value: majore,
+                  child: Text(majore),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          controller: CountOfLearn,
+          decoration: InputDecoration(
+            labelText: status[5],
+            labelStyle: TextStyle(color: Colors.black),
             border: OutlineInputBorder(),
           ),
         ),
@@ -122,10 +268,10 @@ class _homescanState extends State<homescan> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextField(
-          controller: learnforweek,
+          controller: Hours,
           decoration: InputDecoration(
-            labelText: "จำนวนชั่วโมงเรียน",
-            labelStyle: TextStyle(color: Colors.white),
+            labelText: status[6],
+            labelStyle: TextStyle(color: Colors.black),
             border: OutlineInputBorder(),
           ),
         ),
@@ -145,68 +291,82 @@ class _homescanState extends State<homescan> {
     Navigator.pushNamed(context, AppRoute.PSQI);
   }
 
-  void _printValues() {
-    print('ID: ${ID.text}');
-    print('Sex: ${sex.text}');
-    print('Age: ${ofAge.text}');
-    print('Year: ${year.text}');
-    print('Number of Learn: ${numoflearn.text}');
-    print('Learn for Week: ${learnforweek.text}');
-  }
-
   authorbuid() {
     return [
-      ElevatedButton(
-        onPressed: _ST5,
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          // กำหนดสีพื้นหลังเมื่อปุ่มอยู่ในสถานะปกติ
-          foregroundColor: MaterialStateProperty.all<Color>(
-              Colors.white), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
-        ),
-        child: Text("        แบบประเมินความเครียด (ST-5)        "),
-      ),
-
-      OutlinedButton(
-        onPressed: _SASSV,
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          // กำหนดสีพื้นหลังเมื่อปุ่มอยู่ในสถานะปกติ
-          foregroundColor: MaterialStateProperty.all<Color>(
-              Colors.white), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
-        ),
-        child: Text("แบบประเมินการติดสมาร์ทโฟน (SAS-SV)"),
-      ),
-      OutlinedButton(
-        onPressed: _PSQI,
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          // กำหนดสีพื้นหลังเมื่อปุ่มอยู่ในสถานะปกติ
-          foregroundColor: MaterialStateProperty.all<Color>(
-              Colors.white), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
-        ),
-        child: Text(" แบบประเมินคุณภาพการนอนหลับ PSQI "),
-      ),
-      OutlinedButton(
-          onPressed: _postData, // เรียกใช้ฟังก์ชัน _printValues เมื่อปุ่มถูกกด
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          ),
-          child: Text("     SUCCES     "), // เปลี่ยนข้อความบนปุ่มเป็น "Print Values"
-      ),
+      // OutlinedButton(
+      //   onPressed: _ST5,
+      //   style: ButtonStyle(
+      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+      //     // กำหนดให้พื้นหลังเป็นโปร่งใส
+      //     foregroundColor: MaterialStateProperty.all<Color>(
+      //         Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+      //     side: MaterialStateProperty.all<BorderSide>(
+      //         BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
+      //   ),
+      //   child: Text(
+      //     "แบบประเมินความเครียด (ST-5)",
+      //     style: TextStyle(
+      //       fontSize: 20,
+      //       fontFamily: 'Kanit',
+      //       color: Color.fromARGB(
+      //           255, 243, 136, 30), // เปลี่ยนแบบอักษรตามที่ต้องการ
+      //     ),
+      //   ),
+      // ),
+      SizedBox(height: 30),
+      // OutlinedButton(
+      //   onPressed: _SASSV,
+      //   style: ButtonStyle(
+      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+      //     // กำหนดให้พื้นหลังเป็นโปร่งใส
+      //     foregroundColor: MaterialStateProperty.all<Color>(
+      //         Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+      //     side: MaterialStateProperty.all<BorderSide>(
+      //         BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
+      //   ),
+      //   child: Text(
+      //     "แบบประเมินการติดสมาร์ทโฟน (SAS-SV)",
+      //     style: TextStyle(
+      //       fontSize: 20,
+      //       fontFamily: 'Kanit',
+      //       color: Color.fromARGB(255, 243, 136, 30),
+      //     ),
+      //   ),
+      // ),
+      SizedBox(height: 30),
+      // OutlinedButton(
+      //   onPressed: _PSQI,
+      //   style: ButtonStyle(
+      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+      //     // กำหนดให้พื้นหลังเป็นโปร่งใส
+      //     foregroundColor: MaterialStateProperty.all<Color>(
+      //         Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+      //     side: MaterialStateProperty.all<BorderSide>(
+      //         BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
+      //   ),
+      //   child: Text(
+      //     "แบบประเมินคุณภาพการนอนหลับ PSQI",
+      //     style: TextStyle(
+      //       fontSize: 20,
+      //       fontFamily: 'Kanit',
+      //       color: Color.fromARGB(255, 243, 136, 30),
+      //     ),
+      //   ),
+      // ),
+      SizedBox(height: 30),
     ];
   }
 
   Future<void> _postData() async {
     // ข้อมูลที่จะโพสต์ไปยัง API
     Map<String, dynamic> data = {
-      "ID" : int.parse(ID.text),
-      "sex" : sex.text,
-      "ofAge" : int.parse(ofAge.text),
-      "year" : int.parse(year.text),
-      "numoflearn" : int.parse(numoflearn.text),
-      "learnforweek" : int.parse(learnforweek.text),
+      "ID": int.parse(ID.text),
+      "Sex": Sex,
+      "ofAge": int.parse(Age.text),
+      "year": int.parse(Year.text),
+      "major": Major,
+      "numoflearn": int.parse(CountOfLearn.text),
+      "learnforweek": int.parse(Hours.text),
     };
     // แปลงข้อมูลเป็น JSON
     String jsonData = jsonEncode(data);
@@ -222,10 +382,33 @@ class _homescanState extends State<homescan> {
     );
     // ตรวจสอบสถานะการตอบกลับจาก API
     if (response.statusCode == 200) {
-      print('Post successful!');
-      print('Response: ${response.body}');
+       setState(() {
+         x = 'บันทึกข้อมูลเรียบร้อย';
+       });
+       _ST5();
+       print('Post successful!');
+       print('Response: ${response.body}');
     } else {
+      setState(() {
+        x = 'พบรหัสซ้ำกรุณาเปลี่ยนรหัสใหม่';
+      });
       print('Failed to post data. Status code: ${response.statusCode}');
     }
   }
+  void _showSuccessSnackBar() {
+    final snackBar = SnackBar(content: Text('บันทึกข้อมูลสำเร็จ'));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+
+  showx() {
+    return[
+      Center(child: Text(x,
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Kanit',
+          ))),
+    ];
+  }
+
 }
