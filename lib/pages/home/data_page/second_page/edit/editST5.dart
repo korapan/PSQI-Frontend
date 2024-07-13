@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:projectmobile/pages/log/routes.dart';
 
-class st5 extends StatefulWidget {
-  const st5({Key? key}) : super(key: key);
+class e_st5 extends StatefulWidget {
+  const e_st5({Key? key}) : super(key: key);
 
   @override
-  State<st5> createState() => _st5State();
+  State<e_st5> createState() => _e_st5State();
 }
 
-class _st5State extends State<st5> {
+class _e_st5State extends State<e_st5> {
   @override
   List<int?> myArray = List<int?>.filled(5, null);
   String last = '';
@@ -41,7 +41,7 @@ class _st5State extends State<st5> {
       ),
       body: SingleChildScrollView(
         child: Container(
-            width: double.infinity,
+          width: double.infinity,
           child: Container(
             padding: const EdgeInsets.all(30),
             child: Column(
@@ -65,59 +65,17 @@ class _st5State extends State<st5> {
                     )),
                 SizedBox(height: 20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: Text(
-                          "ความเครียดเกิดขึ้นได้กับทุกคน สาเหตุที่ทำให้เกิดความเครียดมีหลายอย่าง "
-                              "ความเครียดมีทั้งมีทั้งประโยชน์และโทษ หากมากเกินไปจะเกิดผลเสียต่อร่างกายและจิตใจของท่าน "
-                              "ขอให้ท่านลองประเมินตนเองโดยให้คะแนน 0-3 ที่ตรงกับความรู้สึกของท่าน",
+                          "แก้ไขข้อมูล",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
                             fontFamily: "Kanit",
-                            color: Colors.black,
+                            color: Colors.red,
                             fontWeight: FontWeight.bold,
                           )),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 30),
-                Row(children: [
-                  Text("คะแนน 0 หมายถึง แทบไม่มี",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(children: [
-                  Text("คะแนน 1 หมายถึง เป็นบางครัง",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(children: [
-                  Text("คะแนน 2 หมายถึง บ่อยครั้ง",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(
-                  children: [
-                    Text(
-                      "คะแนน 3 หมายถึง เป็นประจำ",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ],
                 ),
@@ -226,8 +184,9 @@ class _st5State extends State<st5> {
                             print('no');
                           } else {
                             testprint();
-                            _postDataST5();
-                             // กลับไปที่หน้า _homescanState
+                            _posteditST5();
+                            //_postDataST5();
+                            // กลับไปที่หน้า _homescanState
                             //_postDataST5();
                             //_postDataST5();
                           }
@@ -243,7 +202,7 @@ class _st5State extends State<st5> {
                           elevation: MaterialStateProperty.all<double>(
                               20), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
                         ),
-                        child: Text("ยืนยัน"),
+                        child: Text("แก้ไข"),
                       ),
                     ),
                     Column(
@@ -263,15 +222,6 @@ class _st5State extends State<st5> {
       ),
     );
   }
-
-  void _handHome() {
-    Navigator.pushNamed(context, AppRoute.Home);
-  }
-
-  void _handback() {
-    Navigator.pushNamed(context, AppRoute.scan);
-  }
-
   testprint(){
     return[
       //print(myArray[0]),
@@ -282,7 +232,7 @@ class _st5State extends State<st5> {
     ];
   }
 
-  Future<void> _postDataST5() async {
+  Future<void> _posteditST5() async {
     // ข้อมูลที่จะโพสต์ไปยัง API
     Map<String, dynamic> data = {
       "ns1": int.parse(myArray[0].toString()),
@@ -294,7 +244,7 @@ class _st5State extends State<st5> {
     // แปลงข้อมูลเป็น JSON
     String jsonData = jsonEncode(data);
     // URL ของ API ที่ต้องการโพสต์ข้อมูลไป
-    String apiUrl = AppRoute.ipaddress + '/receive-dataST5';
+    String apiUrl = AppRoute.ipaddress + '/edit-dataST5';
     // สร้างคำขอโพสต์
     http.Response response = await http.post(
       Uri.parse(apiUrl),
@@ -308,8 +258,8 @@ class _st5State extends State<st5> {
       print('Post successful!');
       print('Response: ${response.body}');
       setState(() {
+        _editer(context);
         last = '';
-        _handback();
       });
     } else {
       setState(() {
@@ -355,5 +305,10 @@ class _st5State extends State<st5> {
       ),
     ];
   }
-
+  void _editer(BuildContext context) {
+    Navigator.pushNamed(context, AppRoute.edit);
+  }
+  void _handHome() {
+    Navigator.pushNamed(context, AppRoute.Home);
+  }
 }

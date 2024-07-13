@@ -15,7 +15,7 @@ class _datageneralState extends State<Datageneral> {
   late Future<List<dynamic>> futureData;
 
   Future<List<dynamic>> fetchData() async {
-    final response = await http.get(Uri.parse('http://127.0.0.1:5000/get_data_ST5'));
+    final response = await http.get(Uri.parse(AppRoute.ipaddress+'/get_data_ST5'));
 
     if (response.statusCode == 200) {
       // หากเรียก API สำเร็จ
@@ -111,7 +111,7 @@ class _datageneralState extends State<Datageneral> {
 // สร้างฟังก์ชันสำหรับการร้องขอข้อมูลจาก API
 // Future fetchData() async {
 //   // URL ของ API
-//   Uri apiUrl = Uri.parse ('http://127.0.0.1:5000/get_data_ST5');
+//   Uri apiUrl = Uri.parse (AppRoute.ipaddress+'/get_data_ST5');
 //
 //   // ทำการร้องขอข้อมูลจาก API ด้วยเมธอด get()
 //   final response = await http.get(apiUrl);

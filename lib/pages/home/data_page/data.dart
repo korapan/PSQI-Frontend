@@ -53,7 +53,7 @@ class _homedataState extends State<homedata> {
                         },
                         style: ButtonStyle(
                           fixedSize: MaterialStateProperty.all<Size>(Size(
-                              175, 175)),
+                              150, 150)),
                           // กำหนดขนาดของปุ่ม
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 252, 182, 120)),
@@ -90,7 +90,7 @@ class _homedataState extends State<homedata> {
                         },
                         style: ButtonStyle(
                           fixedSize: MaterialStateProperty.all<Size>(Size(
-                              175, 175)),
+                              150, 150)),
                           // กำหนดขนาดของปุ่ม
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 248, 152, 66)),
@@ -133,7 +133,7 @@ class _homedataState extends State<homedata> {
                         },
                         style: ButtonStyle(
                           fixedSize: MaterialStateProperty.all<Size>(Size(
-                              175, 175)),
+                              150, 150)),
                           // กำหนดขนาดของปุ่ม
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 244, 125, 31)),
@@ -170,7 +170,7 @@ class _homedataState extends State<homedata> {
                         },
                         style: ButtonStyle(
                           fixedSize: MaterialStateProperty.all<Size>(Size(
-                              175, 175)),
+                              150, 150)),
                           // กำหนดขนาดของปุ่ม
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 238, 108, 33)),
@@ -234,7 +234,7 @@ class _homedataState extends State<homedata> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "ค้นหา / เพิ่ม / ลบ / แก้ไข ", style: TextStyle(
+                        "ค้นหา และ ลบ  ", style: TextStyle(
                         fontFamily: 'Kanit',
                         fontSize: 21, // ขนาดตัวอักษรตามที่ต้องการ
                         color: Colors.black,

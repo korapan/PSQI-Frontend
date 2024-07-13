@@ -105,7 +105,7 @@ class _seemST5State extends State<seemST5> {
   }
 
   Future<List<dynamic>> fetchData() async {
-    final response = await http.get(Uri.parse('http://127.0.0.1:5000/get_data_ST5'));
+    final response = await http.get(Uri.parse(AppRoute.ipaddress+'/get_data_ST5'));
 
     if (response.statusCode == 200) {
       // หากเรียก API สำเร็จ

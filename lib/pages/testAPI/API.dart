@@ -14,7 +14,7 @@ Future<void> postData() async {
   String jsonData = jsonEncode(data);
 
   // URL ของ API ที่ต้องการโพสต์ข้อมูลไป
-  String apiUrl = 'http://127.0.0.1:5000/receive-data';
+  String apiUrl = AppRoute.ipaddress+'/receive-data';
 
   // สร้างคำขอโพสต์
   http.Response response = await http.post(
@@ -48,7 +48,7 @@ Future<void> postData() async {
 //
 //   Future<Map<String, dynamic>> fetchData() async {
 //     final response = await http.get(
-//         Uri.parse('http://127.0.0.1:5000/get_person'));
+//         Uri.parse(AppRoute.ipaddress+'/get_person'));
 //     if (response.statusCode == 200) {
 //       print(response.body);
 //       //print("hello");

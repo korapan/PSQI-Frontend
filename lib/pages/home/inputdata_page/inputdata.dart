@@ -6,6 +6,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:excel/excel.dart';
 import 'package:http/http.dart' as http;
 import 'package:projectmobile/pages/log/routes.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:file_picker/file_picker.dart';
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -82,7 +86,7 @@ class _homeinputState extends State<homeinput> {
                       "เลือกไฟล์ Excel",
                       style: TextStyle(
                         fontSize: 15,
-                        color: Color.fromARGB(255, 243, 136, 30),
+                        color: Color.fromARGB(255, 128, 159, 90),
                         fontFamily: 'Kanit',
                       ),
                     ),
@@ -92,6 +96,7 @@ class _homeinputState extends State<homeinput> {
               SizedBox(height: 30),
               ...buidimport(),
               // SizedBox(height: 30), // Add spacing between the imported items and the next button
+              //...buidnext(),
             ],
           ),
         ),
@@ -102,8 +107,11 @@ class _homeinputState extends State<homeinput> {
   buidnext() {
     return [
       ElevatedButton(
-        onPressed: () {
-          _handHome(context);
+        onPressed: () async {
+          String? directoryPath = await FilePicker.platform.getDirectoryPath();
+          if (directoryPath != null) {
+            // ทำสิ่งที่ต้องการกับ directoryPath ที่ผู้ใช้เลือก
+          }
         },
         style: ButtonStyle(
           fixedSize: MaterialStateProperty.all<Size>(
@@ -138,7 +146,7 @@ class _homeinputState extends State<homeinput> {
         style: ButtonStyle(
           fixedSize: MaterialStateProperty.all<Size>(Size(50, 80)),
           backgroundColor: MaterialStateProperty.all<Color>(
-              Color.fromARGB(255, 243, 136, 30)),
+              Color.fromARGB(255, 127, 97, 166)),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
@@ -168,7 +176,7 @@ class _homeinputState extends State<homeinput> {
         style: ButtonStyle(
           fixedSize: MaterialStateProperty.all<Size>(Size(50, 80)),
           backgroundColor: MaterialStateProperty.all<Color>(
-              Color.fromARGB(255, 243, 136, 30)),
+              Color.fromARGB(255, 127, 97, 166)),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
@@ -198,7 +206,7 @@ class _homeinputState extends State<homeinput> {
         style: ButtonStyle(
           fixedSize: MaterialStateProperty.all<Size>(Size(50, 80)),
           backgroundColor: MaterialStateProperty.all<Color>(
-              Color.fromARGB(255, 243, 136, 30)),
+              Color.fromARGB(255, 127, 97, 166)),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
@@ -267,7 +275,7 @@ class _homeinputState extends State<homeinput> {
     });
     //Create multipart request
       var request = http.MultipartRequest(
-          'POST', Uri.parse('http://127.0.0.1:5000/receivefile-PSQI-data'));
+          'POST', Uri.parse(AppRoute.ipaddress+'/receivefile-PSQI-data'));
       request.files.add(
           http.MultipartFile.fromBytes('file', bytes, filename: file.name));
       print('Selected file: ${file.name}');
@@ -309,7 +317,7 @@ class _homeinputState extends State<homeinput> {
 
       // Create multipart request
       var request = http.MultipartRequest(
-          'POST', Uri.parse('http://127.0.0.1:5000/receivefile-ST5-data'));
+          'POST', Uri.parse(AppRoute.ipaddress+'/receivefile-ST5-data'));
       request.files.add(
           http.MultipartFile.fromBytes('file', bytes, filename: file.name));
 
@@ -350,7 +358,7 @@ class _homeinputState extends State<homeinput> {
 
       // Create multipart request
       var request = http.MultipartRequest(
-          'POST', Uri.parse('http://127.0.0.1:5000/receivefile-SASSV-data'));
+          'POST', Uri.parse(AppRoute.ipaddress+'/receivefile-SASSV-data'));
       request.files.add(
           http.MultipartFile.fromBytes('file', bytes, filename: file.name));
 

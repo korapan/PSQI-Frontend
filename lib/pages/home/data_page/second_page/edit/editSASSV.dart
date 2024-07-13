@@ -4,14 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:projectmobile/pages/log/routes.dart';
 import 'package:projectmobile/pages/home/newdata_page/indata.dart';
 
-class sassv extends StatefulWidget {
-  const sassv({Key? key}) : super(key: key);
+class e_sassv extends StatefulWidget {
+  const e_sassv({Key? key}) : super(key: key);
 
   @override
-  State<sassv> createState() => _sassvState();
+  State<e_sassv> createState() => _e_sassvState();
 }
 
-class _sassvState extends State<sassv> {
+class _e_sassvState extends State<e_sassv> {
   List<String> sum = [];
   String? frequency;
   String? usetime;
@@ -93,10 +93,25 @@ class _sassvState extends State<sassv> {
                               color: Color.fromARGB(255, 128, 159, 90),
                               fontFamily: 'Kanit'))),
                 ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                          "แก้ไขข้อมูล",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: "Kanit",
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ),
+                  ],
+                ),
                 Row(children: [Text("")]),
                 ...buildmore(),
                 SizedBox(height: 20),
-                Text('แอปพลิเคชั่นที่ใช้มากที่สุด 3 อันดับแรก (เรียงลำดับ)',style: TextStyle(
+                Text('แอปพลิเคชั่นที่ใช้มากที่สุด 3 อันดับแรก',style: TextStyle(
                   fontSize: 15,
                   fontFamily: "Kanit",
                   color: Colors.black,
@@ -154,10 +169,10 @@ class _sassvState extends State<sassv> {
                         children: [
                           ElevatedButton(
                               onPressed: () {
-                                _choose('TikTok');
+                                _choose('TicTok');
                               },style: ElevatedButton.styleFrom(
                             fixedSize: Size(125, 40), // กำหนดขนาดของปุ่ม
-                          ), child: Text('TikTok')),
+                          ), child: Text('TicTok')),
                           ElevatedButton(
                               onPressed: () {
                                 _choose('Netfix');
@@ -186,63 +201,6 @@ class _sassvState extends State<sassv> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
-                Row(children: [
-                  Text("คะแนน 1 หมายถึง ไม่เห็นด้วยอย่างยิ่ง",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(children: [
-                  Text("คะแนน 2 หมายถึง ไม่เห็นด้วย",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(children: [
-                  Text("คะแนน 3 หมายถึง ไม่เห็นด้วยเล็กน้อย",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(children: [
-                  Text("คะแนน 4 หมายถึง เห็นด้วยเล็น้อย",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(children: [
-                  Text("คะแนน 5 หมายถึง เห็นด้วย",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "Kanit",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ))
-                ]),
-                Row(children: [
-                  Expanded(
-                      child: Text("คะแนน 6 หมายถึง เห็นด้วยอย่างยิ่ง",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: "Kanit",
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          )))
-                ]),
-                Row(children: [Text("")]),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(children: [
@@ -308,13 +266,13 @@ class _sassvState extends State<sassv> {
                   child: Row(children: [
                     Expanded(
                         child:
-                            Text("ข้อที่ 4 ฉันรู้สึกทนไม่ได้ถ้าไม่มีสมาร์ทโฟน",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Kanit",
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                )))
+                        Text("ข้อที่ 4 ฉันรู้สึกทนไม่ได้ถ้าไม่มีสมาร์ทโฟน",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: "Kanit",
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            )))
                   ]),
                 ),
                 Row(
@@ -408,13 +366,13 @@ class _sassvState extends State<sassv> {
                   child: Row(children: [
                     Expanded(
                         child:
-                            Text("ข้อที่ 9 ฉันใช้สมาร์ทโฟนนานกว่าที่ตั้งใจไว้",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Kanit",
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                )))
+                        Text("ข้อที่ 9 ฉันใช้สมาร์ทโฟนนานกว่าที่ตั้งใจไว้",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: "Kanit",
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            )))
                   ]),
                 ),
                 Row(
@@ -455,7 +413,7 @@ class _sassvState extends State<sassv> {
                             print('no');
                           } else {
                             testprint();
-                            _postDataSASSV();
+                            _posteditSASSV();
                             //_handback(); // กลับไปที่หน้า _homescanState
                           }
                           //_postDataST5(); // เรียกใช้ _postDataST5 เมื่อปุ่มถูกกด
@@ -466,11 +424,11 @@ class _sassvState extends State<sassv> {
                               Color.fromARGB(255, 127, 97, 166)),
                           // กำหนดสีพื้นหลังเมื่อปุ่มอยู่ในสถานะปกติ
                           foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(Colors.white),
                           elevation: MaterialStateProperty.all<double>(
                               20), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
                         ),
-                        child: Text("ยืนยัน"),
+                        child: Text("แก้ไข"),
                       ),
                     ),
                     Column(
@@ -494,12 +452,11 @@ class _sassvState extends State<sassv> {
   void _handHome() {
     Navigator.pushNamed(context, AppRoute.Home);
   }
-
-  void _handback() {
-    Navigator.pushNamed(context, AppRoute.scan);
+  void _editer(BuildContext context) {
+    Navigator.pushNamed(context, AppRoute.edit);
   }
 
-  Future<void> _postDataSASSV() async {
+  Future<void> _posteditSASSV() async {
     // ข้อมูลที่จะโพสต์ไปยัง API
     double t = double.parse(time.text);
     Map<String, dynamic> data = {
@@ -523,7 +480,7 @@ class _sassvState extends State<sassv> {
     // แปลงข้อมูลเป็น JSON
     String jsonData = jsonEncode(data);
     // URL ของ API ที่ต้องการโพสต์ข้อมูลไป
-    String apiUrl = AppRoute.ipaddress + '/receive-dataSASSV';
+    String apiUrl = AppRoute.ipaddress + '/edit-dataSASSV';
     // สร้างคำขอโพสต์
     http.Response response = await http.post(
       Uri.parse(apiUrl),
@@ -538,7 +495,7 @@ class _sassvState extends State<sassv> {
       print('Response: ${response.body}');
       setState(() {
         last = '';
-        _handback();
+        _editer(context);
       });
     } else {
       setState(() {
@@ -566,12 +523,12 @@ class _sassvState extends State<sassv> {
       print(rea),
       print(t),
       //print(double.parse(time.text)),
-    for (int i = 0; i < sum.length; i++) {
-    application += sum[i],
-    if (i < sum.length - 1) {
-    application += ',',
-    }
-    },
+      for (int i = 0; i < sum.length; i++) {
+        application += sum[i],
+        if (i < sum.length - 1) {
+          application += ',',
+        }
+      },
       print(application),
     ];
   }

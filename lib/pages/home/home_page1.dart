@@ -6,18 +6,18 @@ import 'dart:convert';
 import 'package:projectmobile/pages/testAPI/API.dart';
 
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class Homepage1 extends StatefulWidget {
+  const Homepage1({super.key});
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<Homepage1> createState() => _Homepage1State();
 }
 
-class _HomepageState extends State<Homepage> {
+class _Homepage1State extends State<Homepage1> {
   @override
   //void initState() {
-    // TODO: implement initState
-    //super.initState();
-    //fetchData();
+  // TODO: implement initState
+  //super.initState();
+  //fetchData();
   //}
   @override
   Widget build(BuildContext context) {
@@ -35,19 +35,19 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: Colors.white,
         centerTitle: true,
         actions: <Widget>[
-    //   IconButton(
-    //   icon: Row(
-    //       children: [
-    //       Icon(Icons.output_sharp), // ไอคอนของปุ่ม
-    //   SizedBox(width: 5), // ระยะห่างระหว่างไอคอนกับข้อความ
-    //   Text("ออกจากระบบ"), // ข้อความที่ต้องการจะแสดง
-    //   ],
-    // ),
-    // onPressed: () {
-    // _login(context);
-    // },
-    // tooltip: "Home", // ข้อความ tooltip สำหรับปุ่ม
-    // ),
+          IconButton(
+            icon: Row(
+              children: [
+                Icon(Icons.output_sharp), // ไอคอนของปุ่ม
+                SizedBox(width: 5), // ระยะห่างระหว่างไอคอนกับข้อความ
+                Text("ออกจากระบบ"), // ข้อความที่ต้องการจะแสดง
+              ],
+            ),
+            onPressed: () {
+              _login(context);
+            },
+            tooltip: "Home", // ข้อความ tooltip สำหรับปุ่ม
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -69,16 +69,16 @@ class _HomepageState extends State<Homepage> {
                     Text(
                       "A smartphone addiction assessment system",
                       style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
+                          fontSize: 30,
+                          color: Colors.black,
                           fontFamily: 'Anton'
                       ),
                     ),
                     Text(
                       "On the effect of sleep quality",
                       style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
+                          fontSize: 30,
+                          color: Colors.black,
                           fontFamily: 'Anton'
                       ),
                     ),
@@ -86,9 +86,9 @@ class _HomepageState extends State<Homepage> {
                     Text(
                       "ระบบประเมินการเสพติดการใช้สมาร์ทโฟนที่ส่งผลต่อคุณภาพการนอนหลับ",
                       style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 128, 159, 90), // สีแดง
-                        fontFamily: 'Kanit'
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 128, 159, 90), // สีแดง
+                          fontFamily: 'Kanit'
                       ),
                     ),
                   ],
@@ -131,8 +131,7 @@ class _HomepageState extends State<Homepage> {
                               child: Image.asset('assets/img_7.png'),
                             ),
                             onPressed: () {
-                              //_newediter(context);
-                              _login(context);
+                              _newediter(context);
                             },
                           ),
                           Text(
@@ -222,30 +221,30 @@ class _HomepageState extends State<Homepage> {
                         ],
                       ),
                     ),
-        Container(
-          child: Column(
-            children: [
-              IconButton(
-                icon: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Image.asset('assets/img_4.png'),
-                ),
-                onPressed: () {
-                  _seempsqi(context);
-                },
-              ),
-              Text(
-                'คุณภาพการนอนหลับ',
-                style: TextStyle(
-                  fontSize: 10, // ปรับขนาดตัวอักษรตามที่ต้องการ
-                  color: Colors.black, // เลือกสีตามที่ต้องการ
-                ),
-              ),
-            ],
-          ),
-        ),
-        ],
+                    Container(
+                      child: Column(
+                        children: [
+                          IconButton(
+                            icon: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Image.asset('assets/img_4.png'),
+                            ),
+                            onPressed: () {
+                              _seempsqi(context);
+                            },
+                          ),
+                          Text(
+                            'คุณภาพการนอนหลับ',
+                            style: TextStyle(
+                              fontSize: 10, // ปรับขนาดตัวอักษรตามที่ต้องการ
+                              color: Colors.black, // เลือกสีตามที่ต้องการ
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 30),
@@ -258,13 +257,13 @@ class _HomepageState extends State<Homepage> {
   }
 
   //Future<Map<String, dynamic>> fetchData() async {
-    //final response = await http.get(Uri.parse(AppRoute.ipaddress+'/get_person'));
-    //if (response.statusCode == 200) {
-      //print(response.body);
-      //return jsonDecode(response.body);
-    //} else {
-      //throw Exception('Failed to load data');
-    //}
+  //final response = await http.get(Uri.parse(AppRoute.ipaddress+'/get_person'));
+  //if (response.statusCode == 200) {
+  //print(response.body);
+  //return jsonDecode(response.body);
+  //} else {
+  //throw Exception('Failed to load data');
+  //}
   //}
 
   void _handpsqi() {
@@ -279,33 +278,6 @@ class _HomepageState extends State<Homepage> {
 
   void _hand() {
     Navigator.pushNamed(context, AppRoute.drec);
-  }
-  buiduser() {
-    return [
-      Container(
-        child: Column(
-          children: [
-            IconButton(
-              icon: SizedBox(
-                width: 40,
-                height: 40,
-                child: Image.asset('assets/img_7.png'),
-              ),
-              onPressed: () {
-                _newediter(context);
-              },
-            ),
-            Text(
-              'แก้ไขข้อมูล',
-              style: TextStyle(
-                fontSize: 10, // ปรับขนาดตัวอักษรตามที่ต้องการ
-                color: Colors.black, // เลือกสีตามที่ต้องการ
-              ),
-            ),
-          ],
-        ),
-      ),
-    ];
   }
 
   buidmenu() {

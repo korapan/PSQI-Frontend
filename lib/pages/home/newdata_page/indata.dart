@@ -13,11 +13,32 @@ class homescan extends StatefulWidget {
 class _homescanState extends State<homescan> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String x = '';
+  String statusst5 = '';
+  String statussassv = '';
+  String statuspsqi = '';
+  String recordA = '!non';
+  String recordB = 'non';
+  String recordC = 'non';
+  String recordD = 'non';
 
   String? selectedGender;
   String? selectmajore;
   List<String> genders = ['ชาย', 'หญิง'];
-  List<String> majore = [' คณิตศาสตร์','ชีววิทยา','เคมี','ฟิสิกส์','สถิติ','วิทยาศาสตร์สิ่งแวดล้อม','วิทยาการคอมพิวเตอร์','จุลชีววิทยา','คณิตศาสตร์ประยุกต์','เทคโนโลยีสารสนเทศ','วิทยาการข้อมูล','เคมีประยุกต์และจุลชีววิทยาอุตสาหกรรม','เคมีผลิตภัณฑ์และธุรกิจเครื่องสำอาง'];
+  List<String> majore = [
+    ' คณิตศาสตร์',
+    'ชีววิทยา',
+    'เคมี',
+    'ฟิสิกส์',
+    'สถิติ',
+    'วิทยาศาสตร์สิ่งแวดล้อม',
+    'วิทยาการคอมพิวเตอร์',
+    'จุลชีววิทยา',
+    'คณิตศาสตร์ประยุกต์',
+    'เทคโนโลยีสารสนเทศ',
+    'วิทยาการข้อมูล',
+    'เคมีประยุกต์และจุลชีววิทยาอุตสาหกรรม',
+    'เคมีผลิตภัณฑ์และธุรกิจเครื่องสำอาง'
+  ];
 
   List<String> status = [
     'รหัส',
@@ -92,37 +113,48 @@ class _homescanState extends State<homescan> {
                 "ประเมินความเครียด พฤติกรรมการติดโทรศัพท์มือถือสาร์ทโฟน และคุณภาพการนอนหลับ โดยแบบประเมินแบ่งออกเป็น 4 ส่วน",
                 style: TextStyle(
                   fontSize: 15,
-                  color: Color.fromARGB(255, 243, 136, 30),
+                  color: Color.fromARGB(255, 128, 159, 90),
                   fontFamily: 'Anton',
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 20),
-              ...bulidText(),
-              SizedBox(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _postData();
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(255, 243, 136, 30)),
-                      // กำหนดสีพื้นหลังเมื่อปุ่มอยู่ในสถานะปกติ
-                      foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                      elevation: MaterialStateProperty.all<double>(
-                          20), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
-                    ),
-                    child: Text("บันทึกข้อมูล"),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: ID,
+                  decoration: InputDecoration(
+                    labelText: status[0],
+                    labelStyle: TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(),
                   ),
+                ),
+              ),
+              Column(
+                children: [
+                  Center(
+                    child: Container(
+                      child: IconButton(
+                        icon: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.asset('assets/img_2.png'),
+                        ),
+                        onPressed: () {
+                          _postIDcheck();
+                        },
+                      ),
+                    ),
+                  ),
+                  Text('ตรวจสอบข้อมูล'),
+                  if (recordA == 'non') ...bulidText(),
                 ],
               ),
-              SizedBox(height: 30),
               ...showx(),
-              //...authorbuid(),
+              SizedBox(
+                height: 10,
+              ),
+              ...authorbuid(),
               // Column(
               //   crossAxisAlignment: CrossAxisAlignment.stretch,
               //   children: [
@@ -150,23 +182,13 @@ class _homescanState extends State<homescan> {
       ),
     );
   }
+
   void _handHome() {
     Navigator.pushNamed(context, AppRoute.Home);
   }
 
   bulidText() {
     return [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextField(
-          controller: ID,
-          decoration: InputDecoration(
-            labelText: status[0],
-            labelStyle: TextStyle(color: Colors.black),
-            border: OutlineInputBorder(),
-          ),
-        ),
-      ),
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: InputDecorator(
@@ -276,6 +298,33 @@ class _homescanState extends State<homescan> {
           ),
         ),
       ),
+      SizedBox(height: 20),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                _postData();
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Color.fromARGB(255, 127, 97, 166)),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                elevation: MaterialStateProperty.all<double>(20),
+              ),
+              child: Text(
+                "บันทึกข้อมูล",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Kanit',
+                  //fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     ];
   }
 
@@ -291,76 +340,170 @@ class _homescanState extends State<homescan> {
     Navigator.pushNamed(context, AppRoute.PSQI);
   }
 
+  void _test() {
+    Navigator.pushNamed(context, AppRoute.cameraPage);
+  }
+
+  void _again() {
+    Navigator.pushNamed(context, AppRoute.againn);
+  }
   authorbuid() {
     return [
-      // OutlinedButton(
-      //   onPressed: _ST5,
-      //   style: ButtonStyle(
-      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-      //     // กำหนดให้พื้นหลังเป็นโปร่งใส
-      //     foregroundColor: MaterialStateProperty.all<Color>(
-      //         Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
-      //     side: MaterialStateProperty.all<BorderSide>(
-      //         BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
-      //   ),
-      //   child: Text(
-      //     "แบบประเมินความเครียด (ST-5)",
-      //     style: TextStyle(
-      //       fontSize: 20,
-      //       fontFamily: 'Kanit',
-      //       color: Color.fromARGB(
-      //           255, 243, 136, 30), // เปลี่ยนแบบอักษรตามที่ต้องการ
-      //     ),
-      //   ),
-      // ),
-      SizedBox(height: 30),
-      // OutlinedButton(
-      //   onPressed: _SASSV,
-      //   style: ButtonStyle(
-      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-      //     // กำหนดให้พื้นหลังเป็นโปร่งใส
-      //     foregroundColor: MaterialStateProperty.all<Color>(
-      //         Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
-      //     side: MaterialStateProperty.all<BorderSide>(
-      //         BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
-      //   ),
-      //   child: Text(
-      //     "แบบประเมินการติดสมาร์ทโฟน (SAS-SV)",
-      //     style: TextStyle(
-      //       fontSize: 20,
-      //       fontFamily: 'Kanit',
-      //       color: Color.fromARGB(255, 243, 136, 30),
-      //     ),
-      //   ),
-      // ),
-      SizedBox(height: 30),
-      // OutlinedButton(
-      //   onPressed: _PSQI,
-      //   style: ButtonStyle(
-      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-      //     // กำหนดให้พื้นหลังเป็นโปร่งใส
-      //     foregroundColor: MaterialStateProperty.all<Color>(
-      //         Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
-      //     side: MaterialStateProperty.all<BorderSide>(
-      //         BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
-      //   ),
-      //   child: Text(
-      //     "แบบประเมินคุณภาพการนอนหลับ PSQI",
-      //     style: TextStyle(
-      //       fontSize: 20,
-      //       fontFamily: 'Kanit',
-      //       color: Color.fromARGB(255, 243, 136, 30),
-      //     ),
-      //   ),
-      // ),
-      SizedBox(height: 30),
+      OutlinedButton(
+        onPressed: _ST5,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+          // กำหนดให้พื้นหลังเป็นโปร่งใส
+          foregroundColor: MaterialStateProperty.all<Color>(
+              Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+          side: MaterialStateProperty.all<BorderSide>(
+              BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
+        ),
+        child: Text(
+          "แบบประเมินความเครียด (ST-5)",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Kanit',
+            color: Color.fromARGB(
+                255, 128, 159, 90), // เปลี่ยนแบบอักษรตามที่ต้องการ
+          ),
+        ),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(statusst5,
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'Kanit',
+              color: Colors.black, // เปลี่ยนแบบอักษรตามที่ต้องการ
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 20),
+      OutlinedButton(
+        onPressed: _SASSV,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+          // กำหนดให้พื้นหลังเป็นโปร่งใส
+          foregroundColor: MaterialStateProperty.all<Color>(
+              Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+          side: MaterialStateProperty.all<BorderSide>(
+              BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
+        ),
+        child: Text(
+          "แบบประเมินการติดสมาร์ทโฟน (SAS-SV)",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Kanit',
+            color: Color.fromARGB(255, 128, 159, 90),
+          ),
+        ),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(statussassv,
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'Kanit',
+              color: Colors.black, // เปลี่ยนแบบอักษรตามที่ต้องการ
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 20),
+      OutlinedButton(
+        onPressed: _PSQI,
+        //onPressed: _test,
+        //onPressed: _again,
+
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+          // กำหนดให้พื้นหลังเป็นโปร่งใส
+          foregroundColor: MaterialStateProperty.all<Color>(
+              Colors.black), // กำหนดสีของตัวอักษรเมื่อปุ่มอยู่ในสถานะปกติ
+          side: MaterialStateProperty.all<BorderSide>(
+              BorderSide.none), // กำหนดให้ไม่มีเส้นขอบ
+        ),
+        child: Text(
+          "แบบประเมินคุณภาพการนอนหลับ PSQI",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Kanit',
+            color: Color.fromARGB(255, 128, 159, 90),
+          ),
+        ),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(statuspsqi,
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'Kanit',
+              color: Colors.black, // เปลี่ยนแบบอักษรตามที่ต้องการ
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 20),
     ];
+  }
+
+  Future<void> _postIDcheck() async {
+    // ข้อมูลที่จะโพสต์ไปยัง API
+    Map<String, dynamic> data = {
+      "ID": ID.text,
+    };
+    String jsonData = jsonEncode(data);
+    String apiUrl = AppRoute.ipaddress + '/receive';
+    http.Response response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonData,
+    );
+    if (response.statusCode == 200) {
+      setState(() {
+        Map<String, dynamic> responseData = jsonDecode(response.body);
+        recordA = responseData['recordA'];recordB = responseData['recordB'];recordC = responseData['recordC'];recordD = responseData['recordD'];
+        if(recordB == '!non'){
+          setState(() {
+            statusst5 = 'สำเร็จ';
+          });
+        }else{statusst5 = '';}
+        if(recordC == '!non'){
+          setState(() {
+            statussassv = 'สำเร็จ';
+          });
+        }else{statussassv = '';}
+        if(recordD == '!non'){
+        setState(() {
+          statuspsqi = 'สำเร็จ';
+          });
+        }else{statuspsqi = '';}
+      });
+      print('Post successful!');
+      // String responseBody = response.body;
+      // print(responseBody);
+    } else {
+      setState(() {
+        recordA = 'non';
+        recordB = 'non';
+        recordC = 'non';
+        recordD = 'non';
+      });
+      print('Failed to post data. Status code: ${response.statusCode}');
+    }
   }
 
   Future<void> _postData() async {
     // ข้อมูลที่จะโพสต์ไปยัง API
     Map<String, dynamic> data = {
-      "ID": int.parse(ID.text),
+      "ID": ID.text,
       "Sex": Sex,
       "ofAge": int.parse(Age.text),
       "year": int.parse(Year.text),
@@ -371,7 +514,7 @@ class _homescanState extends State<homescan> {
     // แปลงข้อมูลเป็น JSON
     String jsonData = jsonEncode(data);
     // URL ของ API ที่ต้องการโพสต์ข้อมูลไป
-    String apiUrl = 'http://127.0.0.1:5000/receive-data';
+    String apiUrl = AppRoute.ipaddress + '/receive-data';
     // สร้างคำขอโพสต์
     http.Response response = await http.post(
       Uri.parse(apiUrl),
@@ -382,12 +525,11 @@ class _homescanState extends State<homescan> {
     );
     // ตรวจสอบสถานะการตอบกลับจาก API
     if (response.statusCode == 200) {
-       setState(() {
-         x = 'บันทึกข้อมูลเรียบร้อย';
-       });
-       _ST5();
-       print('Post successful!');
-       print('Response: ${response.body}');
+      setState(() {
+        x = 'บันทึกข้อมูลเรียบร้อย';
+      });
+      print('Post successful!');
+      print('Response: ${response.body}');
     } else {
       setState(() {
         x = 'พบรหัสซ้ำกรุณาเปลี่ยนรหัสใหม่';
@@ -395,20 +537,20 @@ class _homescanState extends State<homescan> {
       print('Failed to post data. Status code: ${response.statusCode}');
     }
   }
+
   void _showSuccessSnackBar() {
     final snackBar = SnackBar(content: Text('บันทึกข้อมูลสำเร็จ'));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-
   showx() {
-    return[
-      Center(child: Text(x,
-          style: TextStyle(
-            fontSize: 20,
-            fontFamily: 'Kanit',
-          ))),
+    return [
+      Center(
+          child: Text(x,
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Kanit',
+              ))),
     ];
   }
-
 }
